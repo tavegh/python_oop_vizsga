@@ -157,3 +157,47 @@ kolcsonzo.foglalas_lemondasa(road_bike)
 
 # Kölcsönzések kilistázása
 kolcsonzo.kolcsonzesek_kilistazasa()
+
+#Felhasználói interfész létrehozása
+def main():
+    kolcsonzo = Kolcsonzo("Példa Kölcsönző")
+
+    while True:
+        print("\nVálasszon műveletet:")
+        print("1. Biciklik kilistázása")
+        print("2. Bicikli kölcsönzése")
+        print("3. Foglalás lemondása")
+        print("4. Kölcsönzések kilistázása")
+        print("0. Kilépés")
+
+        valasztas = input("Adja meg a kiválasztott művelet számát: ")
+
+        if valasztas == "1":
+            kolcsonzo.bicikli_kilistazasa()
+        elif valasztas == "2":
+            bicikli_id = int(input("Adja meg a bicikli id-jét: "))
+            napok = int(input("Adja meg a kölcsönzés napjainak számát: "))
+            bicikli = kolcsonzo.bicikli_keresese(bicikli_id)
+            if bicikli:
+                kolcsonzo.biciklik_kolcsonzese([bicikli], napok)
+            else:
+                print("Nem található bicikli ilyen id-val.")
+        elif valasztas == "3":
+            bicikli_id = int(input("Adja meg a bicikli ID-jét, amelyen lemondja a foglalást: "))
+            bicikli = kolcsonzo.bicikli_keresese(bicikli_id)
+            if bicikli:
+                kolcsonzo.foglalas_lemondasa(bicikli)
+            else:
+                print("Nem található bicikli ilyen id-val.")
+        elif valasztas == "4":
+            kolcsonzo.kolcsonzesek_kilistazasa()
+        elif valasztas == "0":
+            break
+        else:
+            print("Érvénytelen. Kérjük, adjon meg érvényes számot.")
+
+if __name__ == "__main__":
+    main()
+
+# ezek már nem mennek, vagy hibára futnak vagy nem történik semmi futáskor.
+# vissza kellene néznem az osztályokat és ott is létrehozni pl a bicikli_keresese metódust erre panaszkodik is pycharm
